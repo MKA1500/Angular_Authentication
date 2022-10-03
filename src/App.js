@@ -1,28 +1,27 @@
-import React from 'react';
-import { Button } from '@progress/kendo-react-buttons';
-import kendoka from './kendoka.svg';
+import React, { useEffect } from 'react';
 import './App.scss';
+import MyCalendar from './components/MyCalendar';
+import products from "./products.json";
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
 
 function App() {
-  const handleClick = React.useCallback(() => {
-    window.open('https://www.telerik.com/kendo-react-ui/components/', '_blank');
+  // const handleClick = React.useCallback(() => {
+  //   window.open('https://www.telerik.com/kendo-react-ui/components/', '_blank');
+  // }, []);
+
+  useEffect(() => {
+    console.log('hello', products);
   }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={kendoka} className="App-logo" alt="kendoka" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button
-          themeColor={'primary'}
-          size={"large"}
-          onClick={handleClick}
-        >
-          Learn KendoReact
-        </Button>
-      </header>
+      <MyCalendar />
+      <Grid data={products}>
+        <GridColumn field="ProductName" />
+        <GridColumn field="UnitPrice" />
+        <GridColumn field="UnitsInStock" />
+        <GridColumn field="Discontinued" />
+      </Grid>
     </div>
   );
 }
